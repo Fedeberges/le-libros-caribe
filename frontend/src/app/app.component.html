@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <a routerLink="/" class="brand">📚 Le Libros Caribe</a>
+  <div class="nav-links">
+    <a routerLink="/catalogo">Catálogo</a>
+    <ng-container *ngIf="isLoggedIn$ | async; else notLoggedIn">
+      <a routerLink="/premium" class="btn-premium">⭐ Premium</a>
+      <button (click)="logout()" class="btn-logout">Salir</button>
+    </ng-container>
+    <ng-template #notLoggedIn>
+      <a routerLink="/login">Iniciar sesión</a>
+      <a routerLink="/registro" class="btn-register">Registrarse</a>
+    </ng-template>
+  </div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <p>© 2024 Le Libros Caribe — Libros de dominio público para el mundo</p>
+  <p>
+    <a href="https://www.gutenberg.org" target="_blank">Project Gutenberg</a> ·
+    <a href="https://openlibrary.org" target="_blank">Open Library</a>
+  </p>
+</footer>

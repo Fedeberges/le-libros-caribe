@@ -1,0 +1,40 @@
+<section class="hero">
+  <div class="hero-content">
+    <h1>Le Libros Caribe</h1>
+    <p>Miles de libros clásicos, completamente gratis. Léelos online, guárdalos en tu biblioteca.</p>
+    <a routerLink="/catalogo" class="btn-primary">Explorar Catálogo</a>
+    <a routerLink="/premium" class="btn-secondary">Ir Premium</a>
+  </div>
+</section>
+
+<section class="featured">
+  <h2>Libros Destacados</h2>
+  <div class="books-grid">
+    <div class="book-card" *ngFor="let book of featuredBooks">
+      <img [src]="book.cover_url || 'assets/no-cover.png'" [alt]="book.title" />
+      <div class="book-info">
+        <h3>{{ book.title }}</h3>
+        <p class="author">{{ book.author }}</p>
+        <div class="book-actions">
+          <a [routerLink]="['/libro', book.id]" class="btn-read">Leer</a>
+          <a [href]="book.amazon_url" target="_blank" class="btn-buy">Comprar físico</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <h3>📚 +70,000 libros</h3>
+    <p>Dominio público y Creative Commons</p>
+  </div>
+  <div class="feature">
+    <h3>🌐 Completamente gratis</h3>
+    <p>Sin pagar por leer. Siempre.</p>
+  </div>
+  <div class="feature">
+    <h3>⭐ Premium</h3>
+    <p>Notas, subrayados, sin anuncios, modo offline</p>
+  </div>
+</section>

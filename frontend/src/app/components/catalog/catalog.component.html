@@ -1,0 +1,41 @@
+<div class="catalog-page">
+  <h1>Catálogo de Libros</h1>
+
+  <div class="filters">
+    <input [(ngModel)]="search" placeholder="Buscar por título o autor..." (keyup.enter)="onSearch()" />
+    <select [(ngModel)]="language" (change)="onSearch()">
+      <option value="">Todos los idiomas</option>
+      <option value="en">Inglés</option>
+      <option value="es">Español</option>
+      <option value="fr">Francés</option>
+      <option value="pt">Portugués</option>
+    </select>
+    <button (click)="onSearch()" class="btn-primary">Buscar</button>
+  </div>
+
+  <p class="results-count">{{ total }} libros encontrados</p>
+
+  <div *ngIf="loading" class="loading">Cargando...</div>
+
+  <div class="books-grid" *ngIf="!loading">
+    <div class="book-card" *ngFor="let book of books">
+      <img [src]="book.cover_url || 'assets/no-cover.png'" [alt]="book.title" />
+      <div class="book-info">
+        <h3>{{ book.title }}</h3>
+        <p class="author">{{ book.author }}</p>
+        <p class="language">{{ book.language?.toUpperCase() }}</p>
+        <div class="book-actions">
+          <a [routerLink]="['/libro', book.id]" class="btn-read">Leer</a>
+          <button (click)="addToLibrary(book.id)" class="btn-library">+ Biblioteca</button>
+          <a [href]="book.amazon_url" target="_blank" class="btn-buy" *ngIf="book.amazon_url">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="page === 1">← Anterior</button>
+    <span>Página {{ page }}</span>
+    <button (click)="nextPage()" [disabled]="books.length < perPage">Siguiente →</button>
+  </div>
+</div>

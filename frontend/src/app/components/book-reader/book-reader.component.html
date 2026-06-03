@@ -1,0 +1,23 @@
+<div class="reader-page" *ngIf="book; else loading">
+  <div class="book-header">
+    <img [src]="book.cover_url || 'assets/no-cover.png'" [alt]="book.title" class="cover-large" />
+    <div class="book-meta">
+      <h1>{{ book.title }}</h1>
+      <p class="author">{{ book.author }}</p>
+      <p class="description">{{ book.description }}</p>
+      <div class="actions">
+        <a [href]="book.file_url" target="_blank" class="btn-primary" *ngIf="book.file_url">
+          📖 Leer EPUB
+        </a>
+        <a [href]="book.amazon_url" target="_blank" class="btn-buy" *ngIf="book.amazon_url">
+          🛒 Comprar edición física
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading" *ngIf="loading; else notFound">Cargando libro...</div>
+  <ng-template #notFound><p class="not-found">Libro no encontrado.</p></ng-template>
+</ng-template>
